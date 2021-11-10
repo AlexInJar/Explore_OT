@@ -50,15 +50,21 @@ class extrema:
 
         self.P = P
         return P
+    
+    # def makeTreeforNodes(self,TreeNodes,P):
+    #     '''
+    #     TreeNodes is a dictionary in the form: 
+    #     {True: [list of src int], False: [list of sk int]}
+    #     '''
 
 if __name__ == '__main__':
-    a = np.array(
-        [2,3,3,1,1]
-    )
-    b = np.array(
-        [6,1,1,2]
-    )
-
+    # a = np.array(
+    #     [2,3,3,1,1]
+    # )
+    # b = np.array(
+    #     [6,1,1,2]
+    # )
+    a,b = [2,6,2], [3,3,4]
     Uab = extrema(a,b)
     print(Uab.NWC())
                 
