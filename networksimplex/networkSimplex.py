@@ -125,13 +125,17 @@ class NS(object):
         # print()
         if (G is None):
             weights = nx.get_edge_attributes(self.BipartiteG,'weight').values()
+            weights = [weit*2e-2 for weit in weights]
             # allnodes = self.BipartiteG.nodes
-            # sizes = [n*30 for n in self.a + self.b]
+            print(type(self.a.tolist()))
+            sizlst = self.a.tolist()+(self.b.tolist()) 
+            sizes = [n*3e-5 for n in sizlst]
             nx.draw_networkx(
                 self.BipartiteG,
                 pos=self.pos,
                 width = list(weights),
-                ax=ax
+                ax=ax,
+
             )
         else:
             weights = nx.get_edge_attributes(G,'weight').values()
@@ -313,7 +317,7 @@ class NS(object):
 
 
             aG.remove_edge(leafStem,leafnode)
-            self.drawBipartite(G=aG)
+            # self.drawBipartite(G=aG)
         if (aG.degree(leafStem) == 0):
             return
         else:
@@ -358,7 +362,7 @@ class NS(object):
             for edgTup in theCycle:
                 if edgTup == minEdge:
                     self.BipartiteG.remove_edge(edgTup[0],edgTup[1])
-                    self.drawBipartite()
+                    # self.drawBipartite()
                     continue
                 if (edgTup[0][0],edgTup[0][1]) == vioDir:
                     self.BipartiteG[edgTup[0]][edgTup[1]]['weight'] += minflo
@@ -423,7 +427,7 @@ class NS(object):
             #     if len([nei for nei in self.BipartiteG[node]]) == 1:
             #         violating = None
             self.BipartiteG.add_edge(violating[0],violating[1],weight=0)
-            self.drawBipartite()
+            # self.drawBipartite()
             if (is_forest(self.BipartiteG)):
                 print('Forest!')
                 copiedG = self.BipartiteG.copy()
@@ -447,7 +451,7 @@ if __name__ == '__main__':
 
 
     massAll = 100
-    a,b = makeRanddis(massAll, 7), makeRanddis(massAll, 5)
+    a,b = makeRanddis(massAll, 50), makeRanddis(massAll, 35)
     print(a,b)
     # a,b = [2,6,2], [3,3,4]
 
@@ -468,12 +472,12 @@ if __name__ == '__main__':
     # # print("The leaf nodes are {}".format(testOb.flowDic))
     # testOb.Update()
     # testOb.drawBipartite()
-    # fig, ax = plt.subplots(figsize=(15,10))
+    fig, ax = plt.subplots(figsize=(15,10))
     testOb.makeComplement()
-    testOb.drawBipartite()
+    # testOb.drawBipartite()
     while(not testOb.CheckisOptimal()):
         testOb.Update()
-        testOb.drawBipartite()
+    testOb.drawBipartite(ax=ax)
 
     # def init():
 
